@@ -1,1 +1,2 @@
-# fileUploader
+# File Uploader
+In this project I will combine my newly gained knowledge of prisma ORM with react (frontend) and nodejs (backend) to create an app in which users must sign up and login and it will allow them to upload and share files/folders.
