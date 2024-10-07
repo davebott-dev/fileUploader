@@ -15,8 +15,8 @@ const Index = () => {
     
     return (
         <div>
-            <p>This is {user.username}&apos;s account </p>
-            <button><a href="/api/log-out">Log out</a></button>
+            <h2>Welcome to FileStorage: {user.username} </h2>
+            
         </div>
     )
 
