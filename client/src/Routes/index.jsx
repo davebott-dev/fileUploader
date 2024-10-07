@@ -1,4 +1,5 @@
 import {useState,useEffect} from 'react';
+import {Search} from 'lucide-react';
 
 const Index = () => {
     const [user,setUser] =useState([])
@@ -16,6 +17,14 @@ const Index = () => {
     return (
         <div>
             <h2>Welcome to FileStorage: {user.username} </h2>
+            <div className="header">
+                
+            <div className="searchbar">
+                <input type="text" placeholder="Search for files and filders"></input>
+                <Search/>
+            </div>
+                <div><button></button><button></button></div>
+            </div>
             
         </div>
     )
