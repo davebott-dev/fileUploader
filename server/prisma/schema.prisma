@@ -25,7 +25,10 @@ model User {
 model Post {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  content   String?
+  fileName  String?
+  location  String?
+  data      Bytes?
+  size      Int
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
 }

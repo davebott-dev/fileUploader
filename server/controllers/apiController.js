@@ -30,8 +30,25 @@ module.exports = {
     },
 
     upload: async(req,res) => {
-        const file = req.file;
-        console.log(file);
+        const name = req.file.originalname;
+        const location = req.file.mimetype;
+        const data = req.file.buffer;
+        const size = req.file.size;
+        const user = req.user.id;
+
+    
+        const newUpload = await prisma.post.create({
+            data: {
+                fileName:name,
+                location:location,
+                data:data,
+                size:size,
+                authorId: user,
+            }
+        });
+        console.log(newUpload);
+        res.redirect('http://localhost:5173/homepage')
+       
 
       
     },
