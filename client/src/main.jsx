@@ -5,6 +5,7 @@ import Login from './login.jsx'
 import Root from './Routes/root.jsx'
 import Index from './Routes/index.jsx'
 import Signup from './Routes/signup.jsx'
+import Account from './Routes/account.jsx'
 import './App.css'
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         index:true,
         element:<Index/>,
+      },
+      {
+        path: '/homepage/account',
+        element: <Account/>,
       }
     ]
   }
