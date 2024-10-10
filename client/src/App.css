@@ -220,3 +220,12 @@ a {
 input[type ='file'] {
   display: none;
 }
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  text-align: center;
+}
+.actions div {
+  cursor: pointer;
+}

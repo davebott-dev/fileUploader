@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import {useSubmit} from "react-router-dom";
-import { Search } from "lucide-react";
+import { Search} from "lucide-react";
+import {Download, Edit, Star, Delete} from '@mui/icons-material';
 
 const Index = () => {
   const [user, setUser] = useState([]);
+  const [posts, setPosts] = useState([]);
   const submit = useSubmit();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api");
-      const data = await response.json();
-      setUser(data);
+      const response1 = await fetch("/api");
+      const data1 = await response1.json();
+      setUser(data1);
+
+      const response2 = await fetch("/api/posts");
+      const data2 = await response2.json();
+      console.log(data2)
+      setPosts(data2);
     };
     fetchData();
   }, []);
@@ -75,22 +82,21 @@ const Index = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Sample.txt</td>
-            <td>10/08/2024</td>
-            <td>David Bottenberg</td>
-            <td>user/botte/odinproject/fileuploader/client/sample.txt</td>
-            <td>24kb</td>
-            <td>buttons</td>
+          {posts.map((post,index)=> (
+          <tr key={index}>
+            <td >{post.fileName}</td>
+            <td >{post.createdAt}</td>
+            <td >{user.name}</td>
+            <td >{post.location}</td>
+            <td >{post.size}</td>
+            <td className="actions">
+              <div><Download/> </div>
+              <div><Edit/> </div>
+              <div><Star/> </div>
+              <div><Delete/> </div>             
+            </td>
           </tr>
-          <tr>
-            <td>Sample.txt</td>
-            <td>10/08/2024</td>
-            <td>David Bottenberg</td>
-            <td>user/botte/odinproject/fileuploader/client/sample.txt</td>
-            <td>24kb</td>
-            <td>buttons</td>
-          </tr>
+          ))}
         </tbody>
       </table>
     </div>
