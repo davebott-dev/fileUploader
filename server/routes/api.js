@@ -50,6 +50,7 @@ router.use(
 router.use(passport.session());
 
 router.get('/', controller.getUser);
+router.get('/posts',controller.getFiles);
 router.post('/',controller.createuser);
 router.post(
     '/log-in',

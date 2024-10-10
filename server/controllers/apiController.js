@@ -16,7 +16,6 @@ module.exports = {
         const newUser = await prisma.user.create({
             data: {username,password,name,email},
         });
-        console.log(newUser);
         res.redirect('http://localhost:5173');
     },
 
@@ -36,7 +35,6 @@ module.exports = {
         const size = req.file.size;
         const user = req.user.id;
 
-    
         const newUpload = await prisma.post.create({
             data: {
                 fileName:name,
@@ -46,12 +44,17 @@ module.exports = {
                 authorId: user,
             }
         });
-        console.log(newUpload);
         res.redirect('http://localhost:5173/homepage')
-       
-
-      
     },
+    getFiles: async(req,res)=> {
+        const user = req.user.id;
+        const files = await prisma.post.findMany({
+            where: {
+                authorId: user
+            }
+        });
+        res.json(files);
+    }
 }
 
   //make it so that the uploaded file gets added to the table
