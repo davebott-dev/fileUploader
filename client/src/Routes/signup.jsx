@@ -6,6 +6,26 @@ function Signup() {
     <div>
       <h1>Sign Up</h1>
       <form method="POST" action="/api">
+      <div>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+            required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          ></input>
+        </div>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -19,7 +39,7 @@ function Signup() {
         <div>
           <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             placeholder="Enter a password"
@@ -29,7 +49,7 @@ function Signup() {
         <div>
           <label htmlFor="checkPassword">Re-enter Password</label>
           <input
-            type="text"
+            type="password"
             name="checkPassword"
             id="checkPassword"
             placeholder="Re-enter password"

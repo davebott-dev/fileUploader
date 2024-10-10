@@ -5,10 +5,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
+const multer = require('multer');
+const upload = multer();
 const controller = require('../controllers/apiController');
 
-//configure the passport strategy with prisma to allow users to login
-//render a different screen for the user once they log in
 passport.use(
     new LocalStrategy(async(username,password, done)=> {
         try {
@@ -58,6 +58,7 @@ router.post(
         failureRedirect: 'http://localhost:5173/signup'
     })
 );
+router.post('/upload', upload.single('file'), controller.upload)
 router.get('/log-out', controller.logout);
 
 module.exports = router;
