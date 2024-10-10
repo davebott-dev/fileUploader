@@ -17,7 +17,7 @@ const Index = () => {
 
   return (
     <div className="pageCont">
-      <h2>Welcome to FileStorage: {user.username} </h2>
+      <h2>Welcome to FileStorage: {user.name} </h2>
       <div className="header">
         <div className="searchbar">
           <form role="search">

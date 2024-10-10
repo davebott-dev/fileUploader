@@ -80,7 +80,7 @@ form > div > input {
   color: var(--primary-color);
   font-weight: bold;
 }
-a {
+button a {
   text-decoration: none;
   color: white;
 }
@@ -106,17 +106,28 @@ a {
 }
 main {
   width: 100%;
-  padding: 20px;
 }
 .rootCont > div > aside {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 15%;
 }
 .rootCont>div>aside>div+div {
   display: flex;
   flex-direction: column;
 
+}
+.custom-upload {
+  background: var(--secondary-color);
+  color: white;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
 }
 .rootCont > div > aside > div >button{
   padding: 10px 20px;
@@ -132,7 +143,11 @@ main {
   border-right: 1px solid var(--border-color);
 }
 .rootCont > div > aside > div {
-  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  text-align: center;
 }
 footer {
   display: flex;
@@ -152,6 +167,7 @@ footer {
   align-items: center;
   border-radius: 20px;
   padding: 5px 15px;
+  background: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .searchbar>form>input {
@@ -169,6 +185,9 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 10px 50px;
+  height: 100%;
+  background: var(--background-color);
 }
 .subHeader>select,
 .subHeader>div  {
@@ -193,4 +212,11 @@ tr,table {
 }
 td {
   padding: 12px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+input[type ='file'] {
+  display: none;
 }
