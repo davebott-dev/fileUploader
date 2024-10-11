@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {useSubmit} from "react-router-dom";
 import { Search} from "lucide-react";
-import {Download, Edit, Star, Delete} from '@mui/icons-material';
+import DataTable from "../Components/table";
 
 const Index = () => {
   const [user, setUser] = useState([]);
@@ -70,35 +70,7 @@ const Index = () => {
 
         <div className="submitFilters four">Apply Filter</div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Last Opened</th>
-            <th>Owner</th>
-            <th>Location</th>
-            <th>File Size</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map((post,index)=> (
-          <tr key={index}>
-            <td >{post.fileName}</td>
-            <td >{post.createdAt}</td>
-            <td >{user.name}</td>
-            <td >{post.location}</td>
-            <td >{post.size}</td>
-            <td className="actions">
-              <div><Download/> </div>
-              <div><Edit/> </div>
-              <div><Star/> </div>
-              <div><Delete/> </div>             
-            </td>
-          </tr>
-          ))}
-        </tbody>
-      </table>
+      <DataTable data = {posts} user = {user} />
     </div>
   );
 };
