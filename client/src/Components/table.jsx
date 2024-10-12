@@ -1,6 +1,8 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { Download, Edit, Star, Delete } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+import { tableCellClasses } from "@mui/material/TableCell";
+import "../App.css";
 import {
   Box,
   Table,
@@ -13,10 +15,17 @@ import {
   Paper,
 } from "@mui/material";
 
+const StyledTableHead = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+}));
 
 const DataTable = ({ data, user }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [action, setAction] = useState("/api/delete/");
 
   const handlePageChange = (e, newPage) => {
     setPage(newPage);
@@ -37,70 +46,83 @@ const DataTable = ({ data, user }) => {
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
-              <TableCell>
+              <StyledTableHead>
                 <strong>Name</strong>
-              </TableCell>
-              <TableCell>
+              </StyledTableHead>
+              <StyledTableHead>
                 <strong>Last Opened</strong>
-              </TableCell>
-              <TableCell>
+              </StyledTableHead>
+              <StyledTableHead>
                 <strong>Owner</strong>
-              </TableCell>
-              <TableCell>
+              </StyledTableHead>
+              <StyledTableHead>
                 <strong>Location</strong>
-              </TableCell>
-              <TableCell>
+              </StyledTableHead>
+              <StyledTableHead>
                 <strong>File Size</strong>
-              </TableCell>
-              <TableCell>
+              </StyledTableHead>
+              <StyledTableHead>
                 <strong>Actions</strong>
-              </TableCell>
+              </StyledTableHead>
             </TableRow>
           </TableHead>
           <TableBody>
-            {visibleRows.map((d, index) => (
-              <TableRow
-                key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {d.fileName}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {d.createdAt}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {user.name}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {d.location}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {d.size}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <div className="actions">
-                    <div>
-                      <Download />
+            {visibleRows.map((d, index) => {
+              const handleActionChange = () => {
+                setAction("/api/delete/" + d.id);
+              };
+              return (
+                <TableRow
+                  hover
+                  key={index}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {d.fileName}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {d.createdAt}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {user.name}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {d.location}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {d.size}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <div className="actions">
+                      <div>
+                        <Download />
+                      </div>
+                      <div>
+                        <Edit />
+                      </div>
+                      <div>
+                        <Star />
+                      </div>
+                      <div>
+                        <form action={action} method="POST">
+                          <button
+                            className="delete"
+                            onClick={handleActionChange}
+                          >
+                            <Delete />
+                          </button>
+                        </form>
+                      </div>
                     </div>
-                    <div>
-                      <Edit />
-                    </div>
-                    <div>
-                      <Star />
-                    </div>
-                    <div>
-                      <Delete />
-                    </div>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[5, 10]}
         component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}

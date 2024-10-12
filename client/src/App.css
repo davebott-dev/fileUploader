@@ -22,6 +22,12 @@ h1 {
   color: var(--primary-color);
   text-align: center;
 }
+.delete {
+  background: none;
+  color: black;
+  padding: 0px;
+  cursor: pointer;
+}
 
 button {
   background: var(--secondary-color);
@@ -224,7 +230,6 @@ input[type ='file'] {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  text-align: center;
 }
 .actions div {
   cursor: pointer;
