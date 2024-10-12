@@ -24,7 +24,7 @@ module.exports = {
             if(err) {
                 return next(err);
             }
-            res.redirect('http://localhost:5173')
+            res.redirect('http://localhost:5173');
         })
     },
 
@@ -44,7 +44,7 @@ module.exports = {
                 authorId: user,
             }
         });
-        res.redirect('http://localhost:5173/homepage')
+        res.redirect('http://localhost:5173/homepage');
     },
     getFiles: async(req,res)=> {
         const user = req.user.id;
@@ -54,6 +54,17 @@ module.exports = {
             }
         });
         res.json(files);
+    },
+    delete: async(req,res) => {
+        const id = req.params.id;
+
+        const deletePost = await prisma.post.delete({
+            where: {
+                id:Number(id)
+            }
+        });
+        res.redirect('http://localhost:5173/homepage');
+        
     }
 }
 

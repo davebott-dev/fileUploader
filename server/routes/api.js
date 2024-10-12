@@ -60,6 +60,7 @@ router.post(
     })
 );
 router.post('/upload', upload.single('file'), controller.upload)
+router.post('/delete/:id', controller.delete);
 router.get('/log-out', controller.logout);
 
 module.exports = router;
