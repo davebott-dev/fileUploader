@@ -6,6 +6,7 @@ import DataTable from "../Components/table";
 const Index = () => {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [showBox, setShowBox] = useState(false);
   const submit = useSubmit();
 
   useEffect(() => {
@@ -39,8 +40,8 @@ const Index = () => {
           <Search />
         </div>
         <div>
-          <button>Rows</button>
-          <button>Box</button>
+          <button onClick = {()=> setShowBox(false)}>Rows</button>
+          <button onClick = {()=> setShowBox(true)}>Box</button>
         </div>
       </div>
       <div className="subHeader">
@@ -70,7 +71,10 @@ const Index = () => {
 
         <div className="submitFilters four">Apply Filter</div>
       </div>
-      <DataTable data = {posts} user = {user} />
+      {!showBox ? 
+      <DataTable data = {posts} user = {user} /> : <h1>Hello World</h1>
+    }
+     
     </div>
   );
 };
