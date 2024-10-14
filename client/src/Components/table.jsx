@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Download, Edit, Star, Delete } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
+import { yellow } from "@mui/material/colors";
 import { tableCellClasses } from "@mui/material/TableCell";
 import "../App.css";
 import {
@@ -13,6 +14,9 @@ import {
   TablePagination,
   TableRow,
   Paper,
+  IconButton,
+  Stack,
+  Skeleton
 } from "@mui/material";
 
 const StyledTableHead = styled(TableCell)(({ theme }) => ({
@@ -22,10 +26,10 @@ const StyledTableHead = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const DataTable = ({ data, user }) => {
+const DataTable = ({ data, user, loading }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [action, setAction] = useState("/api/delete/");
+  const [action, setAction] = useState("/api/");
 
   const handlePageChange = (e, newPage) => {
     setPage(newPage);
@@ -41,7 +45,12 @@ const DataTable = ({ data, user }) => {
   );
 
   return (
-    <Box>
+    loading? 
+    <div>
+    <Skeleton variant = "text" sx={{fontSize:'1rem'}}/>
+    <Skeleton variant = "rectangular" width="100%" height = {450}/>
+    </div>
+    :<Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
@@ -68,9 +77,6 @@ const DataTable = ({ data, user }) => {
           </TableHead>
           <TableBody>
             {visibleRows.map((d, index) => {
-              const handleActionChange = () => {
-                setAction("/api/delete/" + d.id);
-              };
               return (
                 <TableRow
                   hover
@@ -93,27 +99,38 @@ const DataTable = ({ data, user }) => {
                     {d.size}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <div className="actions">
-                      <div>
+                    <Stack direction="row" spacing={1}>
+                      <IconButton>
                         <Download />
-                      </div>
-                      <div>
+                      </IconButton>
+                      <IconButton>
                         <Edit />
-                      </div>
-                      <div>
-                        <Star />
-                      </div>
-                      <div>
-                        <form action={action} method="POST">
-                          <button
-                            className="delete"
-                            onClick={handleActionChange}
+                      </IconButton>
+                      <form action={action} method="POST">
+                        <button className="update">
+                          <IconButton
+                            onClick={() =>
+                              setAction(action + "favorite/" + d.id)
+                            }
+                          >
+                            {d.isFav ? (
+                              <Star sx={{ color: yellow[500] }} />
+                            ) : (
+                              <Star />
+                            )}
+                          </IconButton>
+                        </button>
+                      </form>
+                      <form action={action} method="POST">
+                        <button className="delete">
+                          <IconButton
+                            onClick={() => setAction(action + "delete/" + d.id)}
                           >
                             <Delete />
-                          </button>
-                        </form>
-                      </div>
-                    </div>
+                          </IconButton>
+                        </button>
+                      </form>
+                    </Stack>
                   </TableCell>
                 </TableRow>
               );
