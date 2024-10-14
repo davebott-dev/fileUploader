@@ -64,12 +64,28 @@ module.exports = {
             }
         });
         res.redirect('http://localhost:5173/homepage');
+    },
+    favorite: async(req,res) => {
+        const id = req.params.id;
+        const bool = await prisma.post.findFirst({
+            where: {
+                id:Number(id)
+            }
+        });
+
+        const updateFavorite = await prisma.post.update({
+            where: {
+                id: Number(id)
+            },
+            data: {
+                isFav: {
+                    set: !bool.isFav
+                }
+            }
+
+        })
         
+        console.log(updateFavorite)
+        res.redirect('http://localhost:5173/homepage');
     }
 }
-
-  //make it so that the uploaded file gets added to the table
-        //add icons for editing,deleting,etc to the files
-        //make filter and search functional
-        //allow for creating folders 
-        //create an account page
