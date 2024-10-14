@@ -1,5 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
 import { Github } from "lucide-react";
+import {
+  IconFile,
+  IconFolders,
+  IconClock,
+  IconStar,
+  IconTrash,
+} from "@tabler/icons-react";
 import "../App.css";
 
 const Root = () => {
@@ -26,7 +33,7 @@ const Root = () => {
               method="POST"
               encType="multipart/form-data"
             >
-              <label className="custom-upload" htmlFor="file"> 
+              <label className="custom-upload" htmlFor="file">
                 <input
                   type="file"
                   name="file"
@@ -38,12 +45,29 @@ const Root = () => {
             </form>
             <button>Create Folder</button>
           </div>
-          <div>
-            <div>Files</div>
-            <div>Folders</div>
-            <div>Recent</div>
-            <div>Starred</div>
-            <div>Recently Deleted</div>
+          <div className="asidePaths">
+            <div>
+              <div>
+                <IconFile />
+              </div>
+              <div>Files</div>
+            </div>
+            <div>
+              <IconFolders />
+              Folders
+            </div>
+            <div>
+              <IconClock />
+              Recent
+            </div>
+            <div>
+              <IconStar />
+              Starred
+            </div>
+            <div>
+              <IconTrash />
+              Recently Deleted
+            </div>
           </div>
         </aside>
         <main>

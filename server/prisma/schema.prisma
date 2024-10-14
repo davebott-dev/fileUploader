@@ -31,4 +31,5 @@ model Post {
   size      Int
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
+  isFav     Boolean  @default(false)
 }
