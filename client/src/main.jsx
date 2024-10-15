@@ -6,6 +6,7 @@ import Root from './Routes/root.jsx'
 import Index from './Routes/index.jsx'
 import Signup from './Routes/signup.jsx'
 import Account from './Routes/account.jsx'
+import Recent from './Routes/recent.jsx'
 import './App.css'
 
 const router = createBrowserRouter([
@@ -28,7 +29,12 @@ const router = createBrowserRouter([
       {
         path: '/homepage/account',
         element: <Account/>,
+      },
+      {
+        path: '/homepage/recent',
+        element: <Recent/>,
       }
+
     ]
   }
 ])

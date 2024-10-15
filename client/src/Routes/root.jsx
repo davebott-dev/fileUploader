@@ -10,6 +10,8 @@ import {
 import "../App.css";
 
 const Root = () => {
+
+
   return (
     <div className="rootCont">
       <nav>
@@ -50,7 +52,7 @@ const Root = () => {
               <div>
                 <IconFile />
               </div>
-              <div>Files</div>
+              <div><Link to="/homepage">Files</Link></div>
             </div>
             <div>
               <IconFolders />
@@ -58,7 +60,7 @@ const Root = () => {
             </div>
             <div>
               <IconClock />
-              Recent
+              <Link to="/homepage/recent">Recent</Link>
             </div>
             <div>
               <IconStar />
