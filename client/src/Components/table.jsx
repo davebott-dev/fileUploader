@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useFetcher } from "react-router-dom";
 import { Download, Edit, Star, Delete } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { yellow } from "@mui/material/colors";
 import { tableCellClasses } from "@mui/material/TableCell";
 import "../App.css";
+import moment from 'moment';
 import {
   Box,
   Table,
@@ -16,7 +18,7 @@ import {
   Paper,
   IconButton,
   Stack,
-  Skeleton
+  Skeleton,
 } from "@mui/material";
 
 const StyledTableHead = styled(TableCell)(({ theme }) => ({
@@ -44,13 +46,17 @@ const DataTable = ({ data, user, loading }) => {
     page * rowsPerPage + rowsPerPage
   );
 
-  return (
-    loading? 
+  return loading ? (
     <div>
-    <Skeleton variant = "text" sx={{fontSize:'1rem'}}/>
-    <Skeleton variant = "rectangular" width="100%" height = {450}/>
+      <Skeleton
+        animation="wave"
+        variant="rectangular"
+        width="100%"
+        height={450}
+      />
     </div>
-    :<Box>
+  ) : (
+    <Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
@@ -77,6 +83,20 @@ const DataTable = ({ data, user, loading }) => {
           </TableHead>
           <TableBody>
             {visibleRows.map((d, index) => {
+              const handleDownload = (name) => {
+                const blob = new Blob([d.data.data], {
+                  type: "application/octet-stream",
+                });
+                const url = window.URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", name);
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              };
               return (
                 <TableRow
                   hover
@@ -87,7 +107,7 @@ const DataTable = ({ data, user, loading }) => {
                     {d.fileName}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {d.createdAt}
+                    {moment(d.createdAt).format('MMM Do, YYYY')}
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {user.name}
@@ -100,7 +120,7 @@ const DataTable = ({ data, user, loading }) => {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     <Stack direction="row" spacing={1}>
-                      <IconButton>
+                      <IconButton onClick={() => handleDownload(d.fileName)}>
                         <Download />
                       </IconButton>
                       <IconButton>
