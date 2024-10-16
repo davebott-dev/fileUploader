@@ -108,6 +108,7 @@ const DataTable = ({ data, user, loading }) => {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {moment(d.createdAt).format('MMM Do, YYYY')}
+                    
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {user.name}

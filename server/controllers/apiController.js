@@ -84,8 +84,31 @@ module.exports = {
             }
 
         })
-        
-        console.log(updateFavorite)
         res.redirect('http://localhost:5173/homepage');
+    },
+    getRecent: async(req,res)=> {
+        const curr = new Date();
+        const next = new Date(curr);
+        next.setDate(curr.getDate()-2);
+        
+        const recent = prisma.post.findMany({
+            where: {
+                data: {
+                    createdAt: {
+                        gte: next,
+                        lte: curr,
+                        
+
+                    }
+                }
+            }
+        });
+        
+        console.log(curr)
+        console.log(next)
+        res.json(recent);
+
     }
 }
+
+//figure out how to filter for the date

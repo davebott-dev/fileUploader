@@ -60,7 +60,11 @@ const Root = () => {
             </div>
             <div>
               <IconClock />
-              <Link to="/homepage/recent">Recent</Link>
+              <form action="/api/recent" method="GET">
+                <button type="submit">
+                  Recent
+                </button>
+              </form>
             </div>
             <div>
               <IconStar />

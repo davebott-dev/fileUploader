@@ -62,6 +62,7 @@ router.post(
 router.post('/upload', upload.single('file'), controller.upload)
 router.post('/delete/:id', controller.delete);
 router.post('/favorite/:id',controller.favorite);
+router.get('/recent',controller.getRecent);
 router.get('/log-out', controller.logout);
 
 module.exports = router;
