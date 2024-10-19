@@ -1,23 +1,23 @@
 import {useState, useEffect} from 'react';
 
-function Recent() {
-  const [recentPost, setRecentPost] = useState([]);
+function Favorites() {
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/recent");
+      const response = await fetch("/api/favorites");
       const data = await response.json();
-      setRecentPost(data);
+      setFavorites(data);
     };
     fetchData();
   }, []);
 
 
   return (
-    recentPost.map((post,index)=>(
+    favorites.map((post,index)=>(
       <div key={index}>{post.fileName}</div>
     ))
   )
 }
 
-export default Recent;
+export default Favorites;

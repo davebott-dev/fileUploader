@@ -60,15 +60,13 @@ const Root = () => {
             </div>
             <div>
               <IconClock />
-              <form action="/api/recent" method="GET">
-                <button type="submit">
-                  Recent
-                </button>
-              </form>
+              
+                  <Link to= "recent">Recent</Link>
+           
             </div>
             <div>
               <IconStar />
-              Starred
+              <Link to= "favorites">Starred</Link>
             </div>
             <div>
               <IconTrash />
