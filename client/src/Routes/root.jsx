@@ -1,4 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
+import {useState} from 'react';
+import {Snackbar, Alert} from '@mui/material';
 import { Github } from "lucide-react";
 import {
   IconFile,
@@ -10,7 +12,17 @@ import {
 import "../App.css";
 
 const Root = () => {
+const [open,setOpen]= useState(false);
 
+const handleClick = () => {
+  setOpen(true);
+}
+const handleClose = (e,reason) => {
+  if(reason ==='clickaway') {
+    return;
+  }
+  setOpen(false);
+}
 
   return (
     <div className="rootCont">
@@ -41,10 +53,19 @@ const Root = () => {
                   name="file"
                   id="file"
                   onChange={() => document.forms[0].submit()}
+                  onClick = {handleClick}
                 ></input>
                 Upload File
               </label>
             </form>
+            <Snackbar open = {open} autoHideDuration ={5000} onClose ={handleClose}>
+              <Alert
+              onClose ={handleClose}
+              severity = "success"
+              variant = "filled"
+              sx={{width: '100%'}}
+              >Upload Successful</Alert>
+            </Snackbar>
             <button>Create Folder</button>
           </div>
           <div className="asidePaths">

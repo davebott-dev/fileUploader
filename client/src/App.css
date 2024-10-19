@@ -205,9 +205,6 @@ footer {
 }
 .subHeader>select,
 .subHeader>div  {
-  padding: 6px 12px;
-  border-radius: 15px;
-  border: 1px solid var(--border-color);
   font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -216,7 +213,6 @@ footer {
   background: var(--secondary-color);
   color: white;
   font-weight: bold;
-  transform: scale(1.1);
 }
 tr,table {
   margin-top: 10px;

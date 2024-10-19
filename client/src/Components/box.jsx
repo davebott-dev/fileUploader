@@ -14,7 +14,7 @@ import { IconButton, Stack, Skeleton } from "@mui/material";
 import "../App.css";
 import moment from 'moment';
 
-const Box = ({ data, user, loading }) => {
+const BoxView = ({ data, user, loading }) => {
   const [action, setAction] = useState("/api/");
 
   return loading ? (
@@ -102,4 +102,4 @@ const Box = ({ data, user, loading }) => {
   );
 };
 
-export default Box;
+export default BoxView;
