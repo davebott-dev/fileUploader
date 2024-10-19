@@ -91,24 +91,22 @@ module.exports = {
         const next = new Date(curr);
         next.setDate(curr.getDate()-2);
         
-        const recent = prisma.post.findMany({
+        const recent = await prisma.post.findMany({
             where: {
-                data: {
-                    createdAt: {
-                        gte: next,
-                        lte: curr,
-                        
-
-                    }
+                createdAt: {
+                    lte: curr,
+                    gte: next,
                 }
+            },
+         });
+        res.json(recent);
+    },
+    getFavs: async(req,res)=> {
+        const favorites= await prisma.post.findMany({
+            where:{
+                isFav: true,
             }
         });
-        
-        console.log(curr)
-        console.log(next)
-        res.json(recent);
-
+        res.json(favorites);
     }
 }
-
-//figure out how to filter for the date
