@@ -1,5 +1,6 @@
 import {Avatar} from '@mui/material';
 import {useState,useEffect} from 'react';
+import '../App.css';
 
 function stringToColor(string) {
     let hash = 0;
@@ -23,6 +24,8 @@ function stringAvatar(name) {
     return {
       sx: {
         bgcolor: stringToColor(name),
+        height:150,
+        width: 150,
       },
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
@@ -37,6 +40,7 @@ const [loading,setIsLoading]= useState([]);
         const fetchData = async () => {
           const response1 = await fetch("/api");
           const data1 = await response1.json();
+          console.log(data1)
           setUser(data1);
             setIsLoading(false);
         };
@@ -44,8 +48,14 @@ const [loading,setIsLoading]= useState([]);
       }, []);
 
     return (
-        <div>
+      loading? <p>loading...</p>
+      :
+        <div className ="account">
             <Avatar {...stringAvatar(user.name)}/>
+            <div><strong>Name:</strong> {user.name}</div>
+            <div><strong>Email:</strong> {user.email}</div>
+            <div><strong>Username:</strong> {user.username}</div>
+            <div><strong>Account ID:</strong> {user.id}</div>
         </div>
     )
 }

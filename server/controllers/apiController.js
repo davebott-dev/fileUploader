@@ -108,5 +108,25 @@ module.exports = {
             }
         });
         res.json(favorites);
+    },
+    getSearch: async (req,res) => {
+        const params = req.query.search;
+        const search = await prisma.post.findMany({
+            where:{
+                OR: [
+                    {
+                        fileName:{
+                            startsWith: params,
+                        },
+                    },
+                    {
+                        location: {
+                            startsWith: params,
+                        },
+                    },
+                ] 
+            }
+        });
+        res.json(search)
     }
 }

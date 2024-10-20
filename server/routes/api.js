@@ -63,6 +63,7 @@ router.post('/upload', upload.single('file'), controller.upload)
 router.post('/delete/:id', controller.delete);
 router.post('/favorite/:id',controller.favorite);
 router.get('/recent',controller.getRecent);
+router.get('/search', controller.getSearch);
 router.get('/favorites',controller.getFavs);
 router.get('/log-out', controller.logout);
 

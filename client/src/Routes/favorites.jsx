@@ -3,6 +3,8 @@ import { useSubmit } from "react-router-dom";
 import { Search } from "lucide-react";
 import DataTable from "../Components/table";
 import BoxView from "../Components/box";
+import {Box,InputLabel,MenuItem,FormControl,Select,Button} from '@mui/material';
+
 
 function Favorites() {
   const [favorites, setFavorites] = useState([]);
@@ -10,7 +12,20 @@ function Favorites() {
   const [showBox, setShowBox] = useState(false);
   const [highlight, setHighlight] = useState(0);
   const [loading, setIsLoading]= useState(true);
+  const [type, setType] = useState('');
+  const [shared, setShared] =useState('');
+  const [opened,setOpened] =useState('');
   const submit = useSubmit();
+
+  const handleChange1 = (e) => {
+    setType(e.target.value);
+  }
+  const handleChange2 = (e) => {
+    setShared(e.target.value);
+  }
+  const handleChange3 = (e) => {
+    setOpened(e.target.value);
+  }
 
   const handleClick1 = () => {
     setShowBox(false);
@@ -66,31 +81,60 @@ function Favorites() {
           </div>}
       </div>
       <div className="subHeader">
-        <select name="displayType one">
-          <option value="All">All</option>
-          <option value="PDF">PDF</option>
-          <option value="Document">Document</option>
-          <option value="PowerPoint">PowerPoint</option>
-          <option value="Excel">Excel</option>
-          <option value="textFile">Text File</option>
-          <option value="JPG">JPG</option>
-          <option value="PNG">PNG</option>
-          <option value="GIF">GIF</option>
-        </select>
-        <select name="people two">
-          <option value="any">Any</option>
-          <option value="onlyMe">onlyMe</option>
-          <option value="shared">Shared With Me</option>
-          <option value="anyone">Anyone</option>
-        </select>
-        <select name="modified three">
-          <option value="anytime">Anytime</option>
-          <option value="today">Today</option>
-          <option value="week">This Week</option>
-          <option value="month">This Month</option>
-        </select>
-
-        <div className="submitFilters four">Apply Filter</div>
+        <Box sx ={{minWidth:120}}>
+          <FormControl fullWidth>
+            <InputLabel id ='demo-simple-select-Label'>File Type</InputLabel>
+            <Select
+              labelId = 'demo-simple-select-Label'
+              id = 'demo-simple-select'
+              value ={type}
+              label="File Type"
+              onChange ={handleChange1}
+              >
+                <MenuItem value = {"All"}>All</MenuItem>
+                <MenuItem value = {"PDF"}>PDF</MenuItem>
+                <MenuItem value = {"DOCX"}>Word</MenuItem>
+                <MenuItem value = {"PPT"}>PowerPoint</MenuItem>
+                <MenuItem value = {"XLSX"}>Excel</MenuItem>
+                <MenuItem value = {"TXT"}>Text</MenuItem>
+             <MenuItem value = {"JPG"}>JPG</MenuItem>
+                <MenuItem value = {"PNG"}> PNG</MenuItem>
+              </Select>
+          </FormControl>
+        </Box>
+        <Box sx ={{minWidth:120}}>
+          <FormControl fullWidth>
+            <InputLabel id ='selectLabel2'>Shared</InputLabel>
+            <Select
+              labelId = 'sharedType'
+              id = 'shared'
+              label="Shared"
+              value ={shared}
+              onChange ={handleChange2}
+              >
+                <MenuItem value = {"Any"}>Any</MenuItem>
+                <MenuItem value = {"Shared"}>Shared With Me</MenuItem>
+                <MenuItem value = {"Me"}>Me</MenuItem>
+              </Select>
+          </FormControl>
+        </Box>
+        <Box sx ={{minWidth:120}}>
+          <FormControl fullWidth>
+            <InputLabel id ='selectLabel3'>Last Opened</InputLabel>
+            <Select
+              labelId = 'lastOpened'
+              id = 'opened'
+              label ="Last Opened"
+              value ={opened}
+              onChange ={handleChange3}
+              >
+                <MenuItem value = {"Any"}>Any</MenuItem>
+                <MenuItem value = {"Shared"}>Shared With Me</MenuItem>
+                <MenuItem value = {"Me"}>Me</MenuItem>
+              </Select>
+          </FormControl>
+        </Box>
+        <Button variant= "outlined" className="submitFilters four">Apply Filter</Button>
       </div>
       {!showBox ? (
         <DataTable data={favorites} user={user} loading={loading}/>

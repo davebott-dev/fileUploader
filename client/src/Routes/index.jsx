@@ -15,6 +15,7 @@ const Index = () => {
   const [type, setType] = useState('');
   const [shared, setShared] =useState('');
   const [opened,setOpened] =useState('');
+  const [action,setAction] =useState('/api/search/');
   const submit = useSubmit();
 
   const handleChange1 = (e) => {
@@ -53,15 +54,14 @@ const Index = () => {
   }, []);
 
   return (
-
     user? 
     <div className="pageCont">
       <h2>Welcome to FileStorage: {user.name} </h2>
       <div className="header">
         <div className="searchbar">
-          <form role="search">
+          <form method="GET" action={action}>
             <input
-              onChange={(e) => submit(e.currentTarget.form)}
+              onSubmit= {(e)=>setAction(action+e.target.value)}
               type="text"
               name="search"
               id="search"
@@ -134,7 +134,7 @@ const Index = () => {
               </Select>
           </FormControl>
         </Box>
-        <Button variant= "outlined" className="submitFilters four">Apply Filter</Button>
+        <Button type = "submit" variant= "outlined" className="submitFilters four">Apply Filter</Button>
       </div>
       {!showBox ? (
         <DataTable data={posts} user={user} loading={loading}/>

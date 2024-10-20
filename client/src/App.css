@@ -280,3 +280,11 @@ input[type ='file'] {
   border: 1px solid var(--border-color);
   border-radius: 5px;
 }
+.account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 50px;
+}
